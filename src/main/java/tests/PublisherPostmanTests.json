@@ -1,0 +1,426 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Publisher Telosys 3 REST API Tests",
+		"description": "Telosys Tools 3 Node.JS Template Publisher entity generated API tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create a publisher",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Test if response code is 200 or 400",
+							"if (responseCode.code === 200) {",
+							"    tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"    } else if (responseCode.code === 201) {",
+							"        tests[\"Status code is 201\"] = responseCode.code === 201;",
+							"    } else {",
+							"        tests[\"Status code is 400\"] = responseCode.code === 400;",
+							"}",
+							"",
+							"// Test if response has a Content Type",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							"",
+							"// Test if Content Type is a json response",
+							"tests[\"Content-Type is application/json\"] = ",
+							"responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"",
+							"// Test if JSON response objects are valid",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"if (jsonData.errorCode) {",
+							"    // Check the content of every value",
+							"    if (jsonData.errorCode === 200) {",
+							"    tests[\"Object errorCode value is 200\"] = jsonData.errorCode === 200;",
+							"        } else {",
+							"            tests[\"Object errorCode value is 400\"] = jsonData.errorCode === 400;",
+							"        }",
+							"    if (jsonData.message === \"Success\") {",
+							"        tests[\"Object message value is 'Success'\"] = jsonData.message === \"Success\";",
+							"        } else {",
+							"            tests[\"Object message value is 'Invalid arguments'\"] = jsonData.message === \"Invalid arguments\";",
+							"        }",
+							"    } else {",
+							"        tests[\"Object value code is correct\"] = jsonData.code === 77;",
+							"        tests[\"Object value countryCode is correct\"] = jsonData.countryCode === \"lorem ipsum\";",
+							"        tests[\"Object value name is correct\"] = jsonData.name === \"lorem ipsum\";",
+							"        tests[\"Object value email is correct\"] = jsonData.email === \"lorem ipsum\";",
+							"        tests[\"Object value contact is correct\"] = jsonData.contact === \"lorem ipsum\";",
+							"        tests[\"Object value city is correct\"] = jsonData.city === \"lorem ipsum\";",
+							"        tests[\"Object value zipCode is correct\"] = jsonData.zipCode === 77;",
+							"        tests[\"Object value phone is correct\"] = jsonData.phone === \"lorem ipsum\";",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/api/publisher",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"code\": 77,\n\t\"countryCode\": \"lorem ipsum\",\n\t\"name\": \"lorem ipsum\",\n\t\"email\": \"lorem ipsum\",\n\t\"contact\": \"lorem ipsum\",\n\t\"city\": \"lorem ipsum\",\n\t\"zipCode\": 77,\n\t\"phone\": \"lorem ipsum\"\n}"
+				},
+				"description": "Create a publisher"
+			},
+			"response": []
+		},
+		{
+			"name": "Get one publisher",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Test if response code is 200 or 404",
+							"if (responseCode.code === 200) {",
+							"    tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"    } else {",
+							"        tests[\"Status code is 404\"] = responseCode.code === 404;",
+							"}",
+							"",
+							"// Test if response has a Content Type",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							"",
+							"// Test if Content Type is a json response",
+							"tests[\"Content-Type is application/json\"] = ",
+							"responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"",
+							"// Test if JSON response objects are valid",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"if (jsonData.errorCode) {",
+							"    // Check the content of every value",
+							"    if (jsonData.errorCode === 200) {",
+							"        tests[\"Object errorCode value is 200\"] = jsonData.errorCode === 200;",
+							"        } else {",
+							"            tests[\"Object errorCode value is 404\"] = jsonData.errorCode === 404;",
+							"    }",
+							"    if (jsonData.message === \"Success\") {",
+							"        tests[\"Object message value is 'Success'\"] = jsonData.message === \"Success\";",
+							"        } else {",
+							"            tests[\"Object message value is 'Entity not found'\"] = jsonData.message === \"Entity not found\";",
+							"    }",
+							"    } else {",
+							"        tests[\"Object value code is correct\"] = jsonData.code === 77;",
+							"        tests[\"Object value countryCode is correct\"] = jsonData.countryCode === \"lorem ipsum\";",
+							"        tests[\"Object value name is correct\"] = jsonData.name === \"lorem ipsum\";",
+							"        tests[\"Object value email is correct\"] = jsonData.email === \"lorem ipsum\";",
+							"        tests[\"Object value contact is correct\"] = jsonData.contact === \"lorem ipsum\";",
+							"        tests[\"Object value city is correct\"] = jsonData.city === \"lorem ipsum\";",
+							"        tests[\"Object value zipCode is correct\"] = jsonData.zipCode === 77;",
+							"        tests[\"Object value phone is correct\"] = jsonData.phone === \"lorem ipsum\";",
+							"}",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/api/publisher/77",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Get one publisher"
+			},
+			"response": []
+		},
+		{
+			"name": "Check if one publisher exists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Test if response code is 200 or 404",
+							"if (responseCode.code === 200) {",
+							"    tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"    } else {",
+							"        tests[\"Status code is 404\"] = responseCode.code === 404;",
+							"}",
+							"",
+							"// Test if response has a Content Type",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							"",
+							"// Test if Content Type is a json response",
+							"tests[\"Content-Type is application/json\"] = ",
+							"responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"",
+							"// Test if JSON response objects are valid",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"if (jsonData.errorCode) {",
+							"    // Check the content of every value",
+							"    if (jsonData.errorCode === 200) {",
+							"        tests[\"Object errorCode value is 200\"] = jsonData.errorCode === 200;",
+							"        } else {",
+							"            tests[\"Object errorCode value is 404\"] = jsonData.errorCode === 404;",
+							"    }",
+							"    if (jsonData.message === \"Success\") {",
+							"        tests[\"Object message value is 'Success'\"] = jsonData.message === \"Success\";",
+							"        } else {",
+							"            tests[\"Object message value is 'Entity not found'\"] = jsonData.message === \"Entity not found\";",
+							"    }",
+							"    } else {",
+							"        tests[\"Returned boolean is true\"] = jsonData === true;",
+							"}",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/api/publisher/exists/77",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Check if one publisher exists"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all publisher",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Test if response code is 200 or 404",
+							"if (responseCode.code === 200) {",
+							"    tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"    } else {",
+							"        tests[\"Status code is 404\"] = responseCode.code === 404;",
+							"}",
+							"",
+							"// Test if response has a Content Type",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							"",
+							"// Test if Content Type is a json response",
+							"tests[\"Content-Type is application/json\"] = ",
+							"responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"",
+							"// Test if JSON response objects are valid",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"if (jsonData.errorCode) {",
+							"    // Check the content of every value",
+							"    if (jsonData.errorCode === 200) {",
+							"        tests[\"Object errorCode value is 200\"] = jsonData.errorCode === 200;",
+							"        } else {",
+							"            tests[\"Object errorCode value is 404\"] = jsonData.errorCode === 404;",
+							"    }",
+							"    if (jsonData.message === \"Success\") {",
+							"        tests[\"Object message value is 'Success'\"] = jsonData.message === \"Success\";",
+							"        } else {",
+							"            tests[\"Object message value is 'Entity not found'\"] = jsonData.message === \"Entity not found\";",
+							"    }",
+							"}",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/api/publisher",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Get all publisher"
+			},
+			"response": []
+		},
+		{
+			"name": "Count all publisher",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Test if response code is 200 or 404",
+							"if (responseCode.code === 200) {",
+							"    tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"    } else {",
+							"        tests[\"Status code is 404\"] = responseCode.code === 404;",
+							"}",
+							"",
+							"// Test if response has a Content Type",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							"",
+							"// Test if Content Type is a json response",
+							"tests[\"Content-Type is application/json\"] = ",
+							"responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"",
+							"// Test if JSON response objects are valid",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"if (jsonData.errorCode) {",
+							"    // Check the content of every value",
+							"    if (jsonData.errorCode === 200) {",
+							"        tests[\"Object errorCode value is 200\"] = jsonData.errorCode === 200;",
+							"        } else {",
+							"            tests[\"Object errorCode value is 404\"] = jsonData.errorCode === 404;",
+							"    }",
+							"    if (jsonData.message === \"Success\") {",
+							"        tests[\"Object message value is 'Success'\"] = jsonData.message === \"Success\";",
+							"        } else {",
+							"            tests[\"Object message value is 'Entity not found'\"] = jsonData.message === \"Entity not found\";",
+							"    }",
+							"    } else {",
+							"        tests[\"Returned value count is an integer\"] = Number.isInteger(jsonData.count);",
+							"}",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/api/publisher/count",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Count all publisher"
+			},
+			"response": []
+		},
+		{
+			"name": "Edit a publisher",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Test if response code is 200 or 404",
+							"if (responseCode.code === 200) {",
+							"    tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"    } else {",
+							"        tests[\"Status code is 404\"] = responseCode.code === 404;",
+							"}",
+							"",
+							"// Test if response has a Content Type",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							"",
+							"// Test if Content Type is a json response",
+							"tests[\"Content-Type is application/json\"] = ",
+							"responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"",
+							"// Test if JSON response objects are valid",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"// Check the content of every value",
+							"if (jsonData.errorCode === 200) {",
+							"    tests[\"Object errorCode value is 200\"] = jsonData.errorCode === 200;",
+							"    } else {",
+							"        tests[\"Object errorCode value is 404\"] = jsonData.errorCode === 404;",
+							"}",
+							"if (jsonData.message === \"Success\") {",
+							"    tests[\"Object message value is 'Success'\"] = jsonData.message === \"Success\";",
+							"    } else {",
+							"        tests[\"Object message value is 'Entity not found'\"] = jsonData.message === \"Entity not found\";",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/api/publisher",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"code\": 77,\n\t\"countryCode\": \"lorem ipsum\",\n\t\"name\": \"lorem ipsum\",\n\t\"email\": \"lorem ipsum\",\n\t\"contact\": \"lorem ipsum\",\n\t\"city\": \"lorem ipsum\",\n\t\"zipCode\": 77,\n\t\"phone\": \"lorem ipsum\"\n}"
+				},
+				"description": "Edit a publisher"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a publisher",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Test if response code is 200 or 404",
+							"if (responseCode.code === 200) {",
+							"    tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"    } else {",
+							"        tests[\"Status code is 404\"] = responseCode.code === 404;",
+							"}",
+							"",
+							"// Test if response has a Content Type",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							"",
+							"// Test if Content Type is a json response",
+							"tests[\"Content-Type is application/json\"] = ",
+							"responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"",
+							"// Test if JSON response objects are valid",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"// Check the content of every value",
+							"if (jsonData.errorCode === 200) {",
+							"    tests[\"Object errorCode value is 200\"] = jsonData.errorCode === 200;",
+							"    } else {",
+							"        tests[\"Object errorCode value is 404\"] = jsonData.errorCode === 404;",
+							"}",
+							"if (jsonData.message === \"Success\") {",
+							"    tests[\"Object message value is 'Success'\"] = jsonData.message === \"Success\";",
+							"    } else {",
+							"        tests[\"Object message value is 'Entity not found'\"] = jsonData.message === \"Entity not found\";",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/api/publisher/77",
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Delete a publisher"
+			},
+			"response": []
+		}
+	]
+}

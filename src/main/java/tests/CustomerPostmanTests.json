@@ -1,0 +1,432 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Customer Telosys 3 REST API Tests",
+		"description": "Telosys Tools 3 Node.JS Template Customer entity generated API tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create a customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Test if response code is 200 or 400",
+							"if (responseCode.code === 200) {",
+							"    tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"    } else if (responseCode.code === 201) {",
+							"        tests[\"Status code is 201\"] = responseCode.code === 201;",
+							"    } else {",
+							"        tests[\"Status code is 400\"] = responseCode.code === 400;",
+							"}",
+							"",
+							"// Test if response has a Content Type",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							"",
+							"// Test if Content Type is a json response",
+							"tests[\"Content-Type is application/json\"] = ",
+							"responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"",
+							"// Test if JSON response objects are valid",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"if (jsonData.errorCode) {",
+							"    // Check the content of every value",
+							"    if (jsonData.errorCode === 200) {",
+							"    tests[\"Object errorCode value is 200\"] = jsonData.errorCode === 200;",
+							"        } else {",
+							"            tests[\"Object errorCode value is 400\"] = jsonData.errorCode === 400;",
+							"        }",
+							"    if (jsonData.message === \"Success\") {",
+							"        tests[\"Object message value is 'Success'\"] = jsonData.message === \"Success\";",
+							"        } else {",
+							"            tests[\"Object message value is 'Invalid arguments'\"] = jsonData.message === \"Invalid arguments\";",
+							"        }",
+							"    } else {",
+							"        tests[\"Object value code is correct\"] = jsonData.code === \"lorem ipsum\";",
+							"        tests[\"Object value countryCode is correct\"] = jsonData.countryCode === \"lorem ipsum\";",
+							"        tests[\"Object value firstName is correct\"] = jsonData.firstName === \"lorem ipsum\";",
+							"        tests[\"Object value lastName is correct\"] = jsonData.lastName === \"lorem ipsum\";",
+							"        tests[\"Object value login is correct\"] = jsonData.login === \"lorem ipsum\";",
+							"        tests[\"Object value password is correct\"] = jsonData.password === \"lorem ipsum\";",
+							"        tests[\"Object value age is correct\"] = jsonData.age === 77;",
+							"        tests[\"Object value city is correct\"] = jsonData.city === \"lorem ipsum\";",
+							"        tests[\"Object value zipCode is correct\"] = jsonData.zipCode === 77;",
+							"        tests[\"Object value phone is correct\"] = jsonData.phone === \"lorem ipsum\";",
+							"        tests[\"Object value reviewer is correct\"] = jsonData.reviewer === 77;",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/api/customer",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"code\": \"lorem ipsum\",\n\t\"countryCode\": \"lorem ipsum\",\n\t\"firstName\": \"lorem ipsum\",\n\t\"lastName\": \"lorem ipsum\",\n\t\"login\": \"lorem ipsum\",\n\t\"password\": \"lorem ipsum\",\n\t\"age\": 77,\n\t\"city\": \"lorem ipsum\",\n\t\"zipCode\": 77,\n\t\"phone\": \"lorem ipsum\",\n\t\"reviewer\": \"77\"\n}"
+				},
+				"description": "Create a customer"
+			},
+			"response": []
+		},
+		{
+			"name": "Get one customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Test if response code is 200 or 404",
+							"if (responseCode.code === 200) {",
+							"    tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"    } else {",
+							"        tests[\"Status code is 404\"] = responseCode.code === 404;",
+							"}",
+							"",
+							"// Test if response has a Content Type",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							"",
+							"// Test if Content Type is a json response",
+							"tests[\"Content-Type is application/json\"] = ",
+							"responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"",
+							"// Test if JSON response objects are valid",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"if (jsonData.errorCode) {",
+							"    // Check the content of every value",
+							"    if (jsonData.errorCode === 200) {",
+							"        tests[\"Object errorCode value is 200\"] = jsonData.errorCode === 200;",
+							"        } else {",
+							"            tests[\"Object errorCode value is 404\"] = jsonData.errorCode === 404;",
+							"    }",
+							"    if (jsonData.message === \"Success\") {",
+							"        tests[\"Object message value is 'Success'\"] = jsonData.message === \"Success\";",
+							"        } else {",
+							"            tests[\"Object message value is 'Entity not found'\"] = jsonData.message === \"Entity not found\";",
+							"    }",
+							"    } else {",
+							"        tests[\"Object value code is correct\"] = jsonData.code === \"lorem ipsum\";",
+							"        tests[\"Object value countryCode is correct\"] = jsonData.countryCode === \"lorem ipsum\";",
+							"        tests[\"Object value firstName is correct\"] = jsonData.firstName === \"lorem ipsum\";",
+							"        tests[\"Object value lastName is correct\"] = jsonData.lastName === \"lorem ipsum\";",
+							"        tests[\"Object value login is correct\"] = jsonData.login === \"lorem ipsum\";",
+							"        tests[\"Object value password is correct\"] = jsonData.password === \"lorem ipsum\";",
+							"        tests[\"Object value age is correct\"] = jsonData.age === 77;",
+							"        tests[\"Object value city is correct\"] = jsonData.city === \"lorem ipsum\";",
+							"        tests[\"Object value zipCode is correct\"] = jsonData.zipCode === 77;",
+							"        tests[\"Object value phone is correct\"] = jsonData.phone === \"lorem ipsum\";",
+							"        tests[\"Object value reviewer is correct\"] = jsonData.reviewer === 77;",
+							"}",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/api/customer/lorem ipsum",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Get one customer"
+			},
+			"response": []
+		},
+		{
+			"name": "Check if one customer exists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Test if response code is 200 or 404",
+							"if (responseCode.code === 200) {",
+							"    tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"    } else {",
+							"        tests[\"Status code is 404\"] = responseCode.code === 404;",
+							"}",
+							"",
+							"// Test if response has a Content Type",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							"",
+							"// Test if Content Type is a json response",
+							"tests[\"Content-Type is application/json\"] = ",
+							"responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"",
+							"// Test if JSON response objects are valid",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"if (jsonData.errorCode) {",
+							"    // Check the content of every value",
+							"    if (jsonData.errorCode === 200) {",
+							"        tests[\"Object errorCode value is 200\"] = jsonData.errorCode === 200;",
+							"        } else {",
+							"            tests[\"Object errorCode value is 404\"] = jsonData.errorCode === 404;",
+							"    }",
+							"    if (jsonData.message === \"Success\") {",
+							"        tests[\"Object message value is 'Success'\"] = jsonData.message === \"Success\";",
+							"        } else {",
+							"            tests[\"Object message value is 'Entity not found'\"] = jsonData.message === \"Entity not found\";",
+							"    }",
+							"    } else {",
+							"        tests[\"Returned boolean is true\"] = jsonData === true;",
+							"}",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/api/customer/exists/lorem ipsum",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Check if one customer exists"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Test if response code is 200 or 404",
+							"if (responseCode.code === 200) {",
+							"    tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"    } else {",
+							"        tests[\"Status code is 404\"] = responseCode.code === 404;",
+							"}",
+							"",
+							"// Test if response has a Content Type",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							"",
+							"// Test if Content Type is a json response",
+							"tests[\"Content-Type is application/json\"] = ",
+							"responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"",
+							"// Test if JSON response objects are valid",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"if (jsonData.errorCode) {",
+							"    // Check the content of every value",
+							"    if (jsonData.errorCode === 200) {",
+							"        tests[\"Object errorCode value is 200\"] = jsonData.errorCode === 200;",
+							"        } else {",
+							"            tests[\"Object errorCode value is 404\"] = jsonData.errorCode === 404;",
+							"    }",
+							"    if (jsonData.message === \"Success\") {",
+							"        tests[\"Object message value is 'Success'\"] = jsonData.message === \"Success\";",
+							"        } else {",
+							"            tests[\"Object message value is 'Entity not found'\"] = jsonData.message === \"Entity not found\";",
+							"    }",
+							"}",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/api/customer",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Get all customer"
+			},
+			"response": []
+		},
+		{
+			"name": "Count all customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Test if response code is 200 or 404",
+							"if (responseCode.code === 200) {",
+							"    tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"    } else {",
+							"        tests[\"Status code is 404\"] = responseCode.code === 404;",
+							"}",
+							"",
+							"// Test if response has a Content Type",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							"",
+							"// Test if Content Type is a json response",
+							"tests[\"Content-Type is application/json\"] = ",
+							"responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"",
+							"// Test if JSON response objects are valid",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"if (jsonData.errorCode) {",
+							"    // Check the content of every value",
+							"    if (jsonData.errorCode === 200) {",
+							"        tests[\"Object errorCode value is 200\"] = jsonData.errorCode === 200;",
+							"        } else {",
+							"            tests[\"Object errorCode value is 404\"] = jsonData.errorCode === 404;",
+							"    }",
+							"    if (jsonData.message === \"Success\") {",
+							"        tests[\"Object message value is 'Success'\"] = jsonData.message === \"Success\";",
+							"        } else {",
+							"            tests[\"Object message value is 'Entity not found'\"] = jsonData.message === \"Entity not found\";",
+							"    }",
+							"    } else {",
+							"        tests[\"Returned value count is an integer\"] = Number.isInteger(jsonData.count);",
+							"}",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/api/customer/count",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Count all customer"
+			},
+			"response": []
+		},
+		{
+			"name": "Edit a customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Test if response code is 200 or 404",
+							"if (responseCode.code === 200) {",
+							"    tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"    } else {",
+							"        tests[\"Status code is 404\"] = responseCode.code === 404;",
+							"}",
+							"",
+							"// Test if response has a Content Type",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							"",
+							"// Test if Content Type is a json response",
+							"tests[\"Content-Type is application/json\"] = ",
+							"responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"",
+							"// Test if JSON response objects are valid",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"// Check the content of every value",
+							"if (jsonData.errorCode === 200) {",
+							"    tests[\"Object errorCode value is 200\"] = jsonData.errorCode === 200;",
+							"    } else {",
+							"        tests[\"Object errorCode value is 404\"] = jsonData.errorCode === 404;",
+							"}",
+							"if (jsonData.message === \"Success\") {",
+							"    tests[\"Object message value is 'Success'\"] = jsonData.message === \"Success\";",
+							"    } else {",
+							"        tests[\"Object message value is 'Entity not found'\"] = jsonData.message === \"Entity not found\";",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/api/customer",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"code\": \"lorem ipsum\",\n\t\"countryCode\": \"lorem ipsum\",\n\t\"firstName\": \"lorem ipsum\",\n\t\"lastName\": \"lorem ipsum\",\n\t\"login\": \"lorem ipsum\",\n\t\"password\": \"lorem ipsum\",\n\t\"age\": 77,\n\t\"city\": \"lorem ipsum\",\n\t\"zipCode\": 77,\n\t\"phone\": \"lorem ipsum\",\n\t\"reviewer\": \"77\"\n}"
+				},
+				"description": "Edit a customer"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Test if response code is 200 or 404",
+							"if (responseCode.code === 200) {",
+							"    tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"    } else {",
+							"        tests[\"Status code is 404\"] = responseCode.code === 404;",
+							"}",
+							"",
+							"// Test if response has a Content Type",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							"",
+							"// Test if Content Type is a json response",
+							"tests[\"Content-Type is application/json\"] = ",
+							"responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"",
+							"// Test if JSON response objects are valid",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"// Check the content of every value",
+							"if (jsonData.errorCode === 200) {",
+							"    tests[\"Object errorCode value is 200\"] = jsonData.errorCode === 200;",
+							"    } else {",
+							"        tests[\"Object errorCode value is 404\"] = jsonData.errorCode === 404;",
+							"}",
+							"if (jsonData.message === \"Success\") {",
+							"    tests[\"Object message value is 'Success'\"] = jsonData.message === \"Success\";",
+							"    } else {",
+							"        tests[\"Object message value is 'Entity not found'\"] = jsonData.message === \"Entity not found\";",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/api/customer/lorem ipsum",
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Delete a customer"
+			},
+			"response": []
+		}
+	]
+}

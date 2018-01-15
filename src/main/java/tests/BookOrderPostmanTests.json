@@ -1,0 +1,422 @@
+{
+	"variables": [],
+	"info": {
+		"name": "BookOrder Telosys 3 REST API Tests",
+		"description": "Telosys Tools 3 Node.JS Template BookOrder entity generated API tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create a bookOrder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Test if response code is 200 or 400",
+							"if (responseCode.code === 200) {",
+							"    tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"    } else if (responseCode.code === 201) {",
+							"        tests[\"Status code is 201\"] = responseCode.code === 201;",
+							"    } else {",
+							"        tests[\"Status code is 400\"] = responseCode.code === 400;",
+							"}",
+							"",
+							"// Test if response has a Content Type",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							"",
+							"// Test if Content Type is a json response",
+							"tests[\"Content-Type is application/json\"] = ",
+							"responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"",
+							"// Test if JSON response objects are valid",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"if (jsonData.errorCode) {",
+							"    // Check the content of every value",
+							"    if (jsonData.errorCode === 200) {",
+							"    tests[\"Object errorCode value is 200\"] = jsonData.errorCode === 200;",
+							"        } else {",
+							"            tests[\"Object errorCode value is 400\"] = jsonData.errorCode === 400;",
+							"        }",
+							"    if (jsonData.message === \"Success\") {",
+							"        tests[\"Object message value is 'Success'\"] = jsonData.message === \"Success\";",
+							"        } else {",
+							"            tests[\"Object message value is 'Invalid arguments'\"] = jsonData.message === \"Invalid arguments\";",
+							"        }",
+							"    } else {",
+							"        tests[\"Object value id is correct\"] = jsonData.id === 77;",
+							"        tests[\"Object value shopCode is correct\"] = jsonData.shopCode === \"lorem ipsum\";",
+							"        tests[\"Object value customerCode is correct\"] = jsonData.customerCode === \"lorem ipsum\";",
+							"        tests[\"Object value employeeCode is correct\"] = jsonData.employeeCode === \"lorem ipsum\";",
+							"        tests[\"Object value date is correct\"] = jsonData.date === \"2012-04-23T18:25:43.511Z\";",
+							"        tests[\"Object value state is correct\"] = jsonData.state === 77;",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/api/bookOrder",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 77,\n\t\"shopCode\": \"lorem ipsum\",\n\t\"customerCode\": \"lorem ipsum\",\n\t\"employeeCode\": \"lorem ipsum\",\n\t\"date\": \"2012-04-23T18:25:43.511Z\",\n\t\"state\": 77\n}"
+				},
+				"description": "Create a bookOrder"
+			},
+			"response": []
+		},
+		{
+			"name": "Get one bookOrder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Test if response code is 200 or 404",
+							"if (responseCode.code === 200) {",
+							"    tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"    } else {",
+							"        tests[\"Status code is 404\"] = responseCode.code === 404;",
+							"}",
+							"",
+							"// Test if response has a Content Type",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							"",
+							"// Test if Content Type is a json response",
+							"tests[\"Content-Type is application/json\"] = ",
+							"responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"",
+							"// Test if JSON response objects are valid",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"if (jsonData.errorCode) {",
+							"    // Check the content of every value",
+							"    if (jsonData.errorCode === 200) {",
+							"        tests[\"Object errorCode value is 200\"] = jsonData.errorCode === 200;",
+							"        } else {",
+							"            tests[\"Object errorCode value is 404\"] = jsonData.errorCode === 404;",
+							"    }",
+							"    if (jsonData.message === \"Success\") {",
+							"        tests[\"Object message value is 'Success'\"] = jsonData.message === \"Success\";",
+							"        } else {",
+							"            tests[\"Object message value is 'Entity not found'\"] = jsonData.message === \"Entity not found\";",
+							"    }",
+							"    } else {",
+							"        tests[\"Object value id is correct\"] = jsonData.id === 77;",
+							"        tests[\"Object value shopCode is correct\"] = jsonData.shopCode === \"lorem ipsum\";",
+							"        tests[\"Object value customerCode is correct\"] = jsonData.customerCode === \"lorem ipsum\";",
+							"        tests[\"Object value employeeCode is correct\"] = jsonData.employeeCode === \"lorem ipsum\";",
+							"        tests[\"Object value date is correct\"] = jsonData.date === \"2012-04-23T18:25:43.511Z\";",
+							"        tests[\"Object value state is correct\"] = jsonData.state === 77;",
+							"}",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/api/bookOrder/77",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Get one bookOrder"
+			},
+			"response": []
+		},
+		{
+			"name": "Check if one bookOrder exists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Test if response code is 200 or 404",
+							"if (responseCode.code === 200) {",
+							"    tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"    } else {",
+							"        tests[\"Status code is 404\"] = responseCode.code === 404;",
+							"}",
+							"",
+							"// Test if response has a Content Type",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							"",
+							"// Test if Content Type is a json response",
+							"tests[\"Content-Type is application/json\"] = ",
+							"responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"",
+							"// Test if JSON response objects are valid",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"if (jsonData.errorCode) {",
+							"    // Check the content of every value",
+							"    if (jsonData.errorCode === 200) {",
+							"        tests[\"Object errorCode value is 200\"] = jsonData.errorCode === 200;",
+							"        } else {",
+							"            tests[\"Object errorCode value is 404\"] = jsonData.errorCode === 404;",
+							"    }",
+							"    if (jsonData.message === \"Success\") {",
+							"        tests[\"Object message value is 'Success'\"] = jsonData.message === \"Success\";",
+							"        } else {",
+							"            tests[\"Object message value is 'Entity not found'\"] = jsonData.message === \"Entity not found\";",
+							"    }",
+							"    } else {",
+							"        tests[\"Returned boolean is true\"] = jsonData === true;",
+							"}",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/api/bookOrder/exists/77",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Check if one bookOrder exists"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all bookOrder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Test if response code is 200 or 404",
+							"if (responseCode.code === 200) {",
+							"    tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"    } else {",
+							"        tests[\"Status code is 404\"] = responseCode.code === 404;",
+							"}",
+							"",
+							"// Test if response has a Content Type",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							"",
+							"// Test if Content Type is a json response",
+							"tests[\"Content-Type is application/json\"] = ",
+							"responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"",
+							"// Test if JSON response objects are valid",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"if (jsonData.errorCode) {",
+							"    // Check the content of every value",
+							"    if (jsonData.errorCode === 200) {",
+							"        tests[\"Object errorCode value is 200\"] = jsonData.errorCode === 200;",
+							"        } else {",
+							"            tests[\"Object errorCode value is 404\"] = jsonData.errorCode === 404;",
+							"    }",
+							"    if (jsonData.message === \"Success\") {",
+							"        tests[\"Object message value is 'Success'\"] = jsonData.message === \"Success\";",
+							"        } else {",
+							"            tests[\"Object message value is 'Entity not found'\"] = jsonData.message === \"Entity not found\";",
+							"    }",
+							"}",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/api/bookOrder",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Get all bookOrder"
+			},
+			"response": []
+		},
+		{
+			"name": "Count all bookOrder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Test if response code is 200 or 404",
+							"if (responseCode.code === 200) {",
+							"    tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"    } else {",
+							"        tests[\"Status code is 404\"] = responseCode.code === 404;",
+							"}",
+							"",
+							"// Test if response has a Content Type",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							"",
+							"// Test if Content Type is a json response",
+							"tests[\"Content-Type is application/json\"] = ",
+							"responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"",
+							"// Test if JSON response objects are valid",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"if (jsonData.errorCode) {",
+							"    // Check the content of every value",
+							"    if (jsonData.errorCode === 200) {",
+							"        tests[\"Object errorCode value is 200\"] = jsonData.errorCode === 200;",
+							"        } else {",
+							"            tests[\"Object errorCode value is 404\"] = jsonData.errorCode === 404;",
+							"    }",
+							"    if (jsonData.message === \"Success\") {",
+							"        tests[\"Object message value is 'Success'\"] = jsonData.message === \"Success\";",
+							"        } else {",
+							"            tests[\"Object message value is 'Entity not found'\"] = jsonData.message === \"Entity not found\";",
+							"    }",
+							"    } else {",
+							"        tests[\"Returned value count is an integer\"] = Number.isInteger(jsonData.count);",
+							"}",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/api/bookOrder/count",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Count all bookOrder"
+			},
+			"response": []
+		},
+		{
+			"name": "Edit a bookOrder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Test if response code is 200 or 404",
+							"if (responseCode.code === 200) {",
+							"    tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"    } else {",
+							"        tests[\"Status code is 404\"] = responseCode.code === 404;",
+							"}",
+							"",
+							"// Test if response has a Content Type",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							"",
+							"// Test if Content Type is a json response",
+							"tests[\"Content-Type is application/json\"] = ",
+							"responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"",
+							"// Test if JSON response objects are valid",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"// Check the content of every value",
+							"if (jsonData.errorCode === 200) {",
+							"    tests[\"Object errorCode value is 200\"] = jsonData.errorCode === 200;",
+							"    } else {",
+							"        tests[\"Object errorCode value is 404\"] = jsonData.errorCode === 404;",
+							"}",
+							"if (jsonData.message === \"Success\") {",
+							"    tests[\"Object message value is 'Success'\"] = jsonData.message === \"Success\";",
+							"    } else {",
+							"        tests[\"Object message value is 'Entity not found'\"] = jsonData.message === \"Entity not found\";",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/api/bookOrder",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 77,\n\t\"shopCode\": \"lorem ipsum\",\n\t\"customerCode\": \"lorem ipsum\",\n\t\"employeeCode\": \"lorem ipsum\",\n\t\"date\": \"2012-04-23T18:25:43.511Z\",\n\t\"state\": 77\n}"
+				},
+				"description": "Edit a bookOrder"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a bookOrder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Test if response code is 200 or 404",
+							"if (responseCode.code === 200) {",
+							"    tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"    } else {",
+							"        tests[\"Status code is 404\"] = responseCode.code === 404;",
+							"}",
+							"",
+							"// Test if response has a Content Type",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							"",
+							"// Test if Content Type is a json response",
+							"tests[\"Content-Type is application/json\"] = ",
+							"responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"",
+							"// Test if JSON response objects are valid",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"// Check the content of every value",
+							"if (jsonData.errorCode === 200) {",
+							"    tests[\"Object errorCode value is 200\"] = jsonData.errorCode === 200;",
+							"    } else {",
+							"        tests[\"Object errorCode value is 404\"] = jsonData.errorCode === 404;",
+							"}",
+							"if (jsonData.message === \"Success\") {",
+							"    tests[\"Object message value is 'Success'\"] = jsonData.message === \"Success\";",
+							"    } else {",
+							"        tests[\"Object message value is 'Entity not found'\"] = jsonData.message === \"Entity not found\";",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/api/bookOrder/77",
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Delete a bookOrder"
+			},
+			"response": []
+		}
+	]
+}
